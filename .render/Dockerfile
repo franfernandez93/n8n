@@ -1,0 +1,6 @@
+FROM n8nio/n8n
+
+ENV NODE_ENV=production
+ENV GENERIC_TIMEZONE=Europe/Madrid
+
+EXPOSE 5678
