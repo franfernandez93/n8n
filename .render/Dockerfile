@@ -1,6 +1,14 @@
-FROM n8nio/n8n
+FROM node:18
 
-ENV NODE_ENV=production
-ENV GENERIC_TIMEZONE=Europe/Madrid
+WORKDIR /app
+
+COPY . .
+
+RUN corepack enable && \
+    corepack prepare pnpm@8.6.3 --activate && \
+    pnpm install --no-frozen-lockfile && \
+    pnpm build
 
 EXPOSE 5678
+
+CMD ["pnpm", "start"]
