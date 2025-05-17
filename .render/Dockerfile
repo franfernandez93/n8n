@@ -23,3 +23,7 @@ EXPOSE 5678
 
 # Comando correcto para ejecutar n8n desde pnpm
 CMD ["pnpm", "n8n", "start"]
+
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
