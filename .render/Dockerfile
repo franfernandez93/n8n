@@ -1,7 +1,8 @@
 FROM node:18-alpine
 
 # Instala herramientas necesarias
-RUN apk add --no-cache bash curl
+RUN apk add --no-cache bash curl git
+
 
 # Crea el directorio de trabajo
 WORKDIR /usr/src/app
