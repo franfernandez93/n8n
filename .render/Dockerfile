@@ -3,24 +3,22 @@ FROM node:18-alpine
 # Instala herramientas necesarias
 RUN apk add --no-cache bash curl
 
-# Crea directorio de trabajo
+# Crea el directorio de trabajo
 WORKDIR /usr/src/app
 
-# Copia package.json y pnpm-lock
+# Copia archivos de configuración
 COPY package*.json ./
 COPY pnpm-lock.yaml ./
-
-# Instala pnpm y dependencias
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
-
-# Copia todo el código
 COPY . .
 
-# Compila
+# Instala pnpm y dependencias
+RUN npm install -g pnpm && pnpm install --no-frozen-lockfile
+
+# Compila el proyecto
 RUN pnpm run build
 
-# Expone el puerto
+# Expone el puerto usado por n8n
 EXPOSE 5678
 
-# Comando de arranque
-CMD ["pnpm", "start"]
+# Comando correcto para ejecutar n8n desde pnpm
+CMD ["pnpm", "n8n", "start"]
